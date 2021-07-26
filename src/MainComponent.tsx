@@ -8,16 +8,17 @@ type ChildProps = {
     getData?: any,
     vessels?: any,
     deleteVessel?: any
+    dispatch?: any
 }
 
 // Refactor this component into a functional component.
-const MainComponent: FC<ChildProps> = ({getData, vessels, deleteVessel}): ReactElement => {
+const MainComponent: FC<ChildProps> = ({getData, vessels, deleteVessel, dispatch}): ReactElement => {
     const { toggle, showDetails } = useContext(GlobalSettingsContext);
     
     useEffect(() => {
       // This code run once, when the component is mounted.
-      getData();
-    }, [ ]);
+      dispatch(fetchDataThunk());
+    }, [dispatch]);
       return (
           <div>
               <h1>Hi, this is a Interview Challenge!</h1>
@@ -33,7 +34,7 @@ const mapStateToProps = (state: any) => ({
   
 const mapDispacthToProps = (dispatch: any) => {
     return {
-        getData: () => dispatch(fetchDataThunk()),
+      dispatch,
         deleteVessel: (id: number) => dispatch(deleteItem(id))    
     };
 };
