@@ -12,7 +12,7 @@ const Container = styled.div`
 `;
 
 
-export function VesselItemComponent({ vessel, showDetails }) {
+export function VesselItemComponent({ vessel, showDetails, deleteVessel }) {
 
   // Access single item data from props.
 
@@ -23,6 +23,7 @@ export function VesselItemComponent({ vessel, showDetails }) {
       <div className="item-name">
         <div>Avatar -- {vessel.Name}</div>
         <div>----- {vessel.ChristianName}</div>
+        <button onClick={() => deleteVessel(vessel.ID)} > Delete </button>
       </div>
 
       <br />
@@ -32,10 +33,6 @@ export function VesselItemComponent({ vessel, showDetails }) {
           <h5>{vessel.Details.IMONumber} - {vessel.Details.Type}</h5>
         </div>
       </div>
-      {
-        // Render item data here according to layout found in `./styles.scss`.
-        // Show details only if global setting is true.
-      }
     </Container>
   );
 }

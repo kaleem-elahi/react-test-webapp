@@ -17,7 +17,8 @@ const VesselListComponent = (props) => {
   return (
     <Container>
       {vessels.map(vessel => {
-        return <VesselItemComponent key={vessel.ID} vessel={vessel} showDetails={props.showDetails} />;
+        return <VesselItemComponent key={vessel.ID} vessel={vessel} showDetails={props.showDetails}
+          deleteVessel={props.deleteVessel} />;
       })}
     </Container>
   );

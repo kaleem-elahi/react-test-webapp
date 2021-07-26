@@ -1,4 +1,5 @@
 export const UPDATE_DATA = 'UPDATE_DATA';
+export const DELETE_ITEM = 'DELETE_ITEM';
 
 const mockData = [
   { ID: 1, Name: 'TT SEAWISE GIANT', ChristianName: 'Gargantula', Details: { Type: 'Tanker', IMONumber: 7381154 } },
@@ -23,3 +24,11 @@ export const fetchDataThunk = () => {
     }
   };
 };
+
+
+export function deleteItem(payload) {
+  return {
+    type: DELETE_ITEM,
+    payload,
+  };
+}

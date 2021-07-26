@@ -1,16 +1,17 @@
 import { FC, ReactElement, useContext, useEffect }  from 'react';
 import { connect } from 'react-redux';
 import VesselListComponentContainer from './components/VesselListComponent';
-import { fetchDataThunk } from './redux/actions';
+import { fetchDataThunk, deleteItem } from './redux/actions';
 import { GlobalSettingsContext  } from './contexts/showDetails';
 
 type ChildProps = {
     getData?: any,
     vessels?: any,
+    deleteVessel?: any
 }
 
 // Refactor this component into a functional component.
-const MainComponent: FC<ChildProps> = ({getData, vessels}): ReactElement => {
+const MainComponent: FC<ChildProps> = ({getData, vessels, deleteVessel}): ReactElement => {
     const { toggle, showDetails } = useContext(GlobalSettingsContext);
     
     useEffect(() => {
@@ -20,8 +21,8 @@ const MainComponent: FC<ChildProps> = ({getData, vessels}): ReactElement => {
       return (
           <div>
               <h1>Hi, this is a Interview Challenge!</h1>
-              <button onClick={() => toggle()}>Show Details</button>
-              <VesselListComponentContainer vessels={vessels} showDetails={showDetails} />
+              {vessels.length ? <button onClick={() => toggle()}>Show Details</button> : null}
+              <VesselListComponentContainer vessels={vessels} showDetails={showDetails} deleteVessel={deleteVessel} />
           </div>
       );
 }
@@ -32,7 +33,8 @@ const mapStateToProps = (state: any) => ({
   
 const mapDispacthToProps = (dispatch: any) => {
     return {
-        getData: () => dispatch(fetchDataThunk())    
+        getData: () => dispatch(fetchDataThunk()),
+        deleteVessel: (id: number) => dispatch(deleteItem(id))    
     };
 };
   
